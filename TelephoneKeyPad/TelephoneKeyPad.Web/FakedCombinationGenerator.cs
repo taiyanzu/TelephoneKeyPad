@@ -5,6 +5,7 @@ using TelephoneKeyPad.Domain;
 
 namespace TelephoneKeyPad.Web
 {
+    [Obsolete("Used for development")]
     public class FakedCombinationGenerator : ICombinationGenerator
     {
         private const int MAX = 1000;

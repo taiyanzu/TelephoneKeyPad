@@ -10,7 +10,8 @@ namespace TelephoneKeyPad.Web
         internal static void Register()
         {
             var container = new Container();
-            container.RegisterSingleton<ICombinationGenerator, FakedCombinationGenerator>();
+            container.RegisterSingleton<ICombinationGenerator>(
+                () => new CombinationGenerator(Keypad.E161));
 
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

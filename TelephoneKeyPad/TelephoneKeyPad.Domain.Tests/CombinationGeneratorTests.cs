@@ -119,19 +119,12 @@ namespace TelephoneKeyPad.Domain.Tests
         public void Generator_ThreadSafe_TaskReaders()
         {
             var generator = new CombinationGenerator(StandardKeypad);
-           // var threadIdByNumber = new ConcurrentDictionary<string, int>();
             var threadCount = 1000;
             var batchSize = 100;
 
             var tasks = Enumerable.Range(1, threadCount)
                 .Select(_ =>
-                    Task.Factory.StartNew(() =>
-                        generator
-                        .Generate(TEST_PHONE_NUMBER)
-                        .Take(batchSize)
-                        .ToList()
-                       // .ForEach(n => threadIdByNumber.TryAdd(n, Thread.CurrentThread.ManagedThreadId))
-                       )
+                    Task.Factory.StartNew(() =>generator.Generate(TEST_PHONE_NUMBER).Take(batchSize).ToList())
                     )
                 .ToArray();
 
@@ -140,7 +133,6 @@ namespace TelephoneKeyPad.Domain.Tests
 
             var sequentialGenerator = new CombinationGenerator(StandardKeypad);
             var sequence = sequentialGenerator.Generate(TEST_PHONE_NUMBER).Take(threadCount * batchSize).ToList();
-        
 
             for (var i = 0; i<batchSize; i++)
             {
