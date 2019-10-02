@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace TelephoneKeyPad.Web.Models
 {
     public class CombinationsVM
     {
         [DisplayName("Phone Number")]
+        [Required]
         public string OriginalNumber { get; set; }
+
         public int ItemCount { get; set; }
         public string[] PagedItems{ get; set; }
         public int PageIndex { get; set; }
