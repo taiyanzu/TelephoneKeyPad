@@ -17,11 +17,10 @@ namespace TelephoneKeyPad.Web.Controllers
             _combinationGenerator = combinationGenerator;
         }
 
-        private CombinationsVM exampleCombinations => new CombinationsVM
+        private CombinationsVM fakedCombinations => new CombinationsVM
         {
             OriginalNumber = "2223334567",
-            ItemCount = _combinationGenerator.TotalItemCount(),
-            PageCount = 100,
+            TotalItemCount = _combinationGenerator.TotalItemCount(),
             PageSize = 10,
             PageIndex = 0,
             PagedItems = _combinationGenerator.GetPageItems().ToArray()
@@ -43,9 +42,13 @@ namespace TelephoneKeyPad.Web.Controllers
             else
             {
                 // fake the generation
-                return View(exampleCombinations);
+                return View(fakedCombinations);
             }
-            
+        }
+
+        public ActionResult Page(string phoneNumber, int? page)
+        {
+            return View(fakedCombinations);
         }
     }
 }
