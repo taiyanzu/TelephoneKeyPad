@@ -6,6 +6,6 @@ namespace TelephoneKeyPad.Domain
     {
         IEnumerable<string> Generate(string phoneNumber);
         int TotalItemCount(string phoneNumber);
-        IEnumerable<string> GetPageItems();
+        IEnumerable<string> GetPageItems(string phoneNumber, int page);
     }
 }

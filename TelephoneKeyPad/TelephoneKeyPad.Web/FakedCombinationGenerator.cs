@@ -21,7 +21,7 @@ namespace TelephoneKeyPad.Web
             }
         }
 
-        public IEnumerable<string> GetPageItems()
+        public IEnumerable<string> GetPageItems(string phoneNumber, int page)
         {
             return Enumerable.Range(1, 10).Select(_ => Guid.NewGuid().ToString());
         }

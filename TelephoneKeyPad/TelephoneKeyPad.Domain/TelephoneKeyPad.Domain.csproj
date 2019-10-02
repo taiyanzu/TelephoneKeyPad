@@ -41,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombinationGenerator.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="ICombinationGenerator.cs" />
+    <Compile Include="KeyGroup.cs" />
+    <Compile Include="Keypad.cs" />
+    <Compile Include="LinkedSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

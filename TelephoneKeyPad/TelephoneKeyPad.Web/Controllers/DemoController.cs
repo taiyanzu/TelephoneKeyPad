@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TelephoneKeyPad.Domain;
 using TelephoneKeyPad.Web.Models;
@@ -10,7 +8,7 @@ namespace TelephoneKeyPad.Web.Controllers
 {
     public class DemoController : Controller
     {
-        private const int PAGE_SIZE = 12;
+        private const int PAGE_SIZE = 10;
         private ICombinationGenerator _generator;
         
         public DemoController(ICombinationGenerator combinationGenerator)
