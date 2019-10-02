@@ -21,8 +21,6 @@ If the input number is 222 555 6106 then the output is
 
 Total number of combinations: <count goes here>
 
-222 555 610M
-222 555 610N
-222 555 610O
-
-
+- 222 555 610M
+- 222 555 610N
+- 222 555 610O
