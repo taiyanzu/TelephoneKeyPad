@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace TelephoneKeyPad.Domain
 {
+    /// <summary>
+    /// A telephone keypad consisting groups of keys
+    /// </summary>
     public class Keypad
     {
         // https://en.wikipedia.org/wiki/E.161

@@ -141,9 +141,6 @@ namespace TelephoneKeyPad.Domain.Tests
                     Assert.AreEqual(sequence[i], task.Result[i]);
                 }
             }
-
-           // Assert.AreEqual(threadCount * batchSize, threadIdByNumber.Count());
-
         }
 
         #endregion

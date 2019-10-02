@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace TelephoneKeyPad.Domain
 {
+    /// <summary>
+    /// A main character and all the associated symbols.
+    /// </summary>
     public class KeyGroup
     {
         private const string ERROR_IS_EMPTY = "{0} should not be empty.";
@@ -48,12 +51,6 @@ namespace TelephoneKeyPad.Domain
                     Next = (i == Letters.Length - 1) ? char.MinValue : Letters[i + 1]
                 };
             }
-        }
-
-        public bool TryGetNextSymbol(char c, out LinkedSymbol symbol)
-        {
-            symbol = ToLinkedSymbols().FirstOrDefault(x => x.Value == c);
-            return symbol != null;
         }
     }
 }

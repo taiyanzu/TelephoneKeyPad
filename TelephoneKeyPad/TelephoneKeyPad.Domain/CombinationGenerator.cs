@@ -1,66 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TelephoneKeyPad.Domain
 {
     public class CombinationGenerator : ICombinationGenerator
     {
-        public string PhoneNumber { get; }
         private readonly Keypad _keypad;
-        private readonly char[] _current;
-        private readonly object lockObject = new object();
 
         public CombinationGenerator(Keypad keypad)
         {
             keypad.ThrowsOnNull(nameof(keypad));
             _keypad = keypad;
         }
-
-        private string Next()
-        {
-            lock (lockObject)
-            {
-                for (var i = _current.Length - 1; i >= 0; i--)
-                {
-                    if (_keypad.Symbols.TryGetValue(_current[i], out LinkedSymbol key)
-                        && key.Next != char.MinValue)
-                    {
-                        // increment the current key, and reset all the keys after it
-                        _current[i] = key.Next;
-                        for (var j = i + 1; j <= _current.Length - 1; j++)
-                        {
-                            _current[j] = _keypad.Symbols[_current[j]].MainDigit;
-                        }
-                        return new string(_current);
-                    }
-                }
-            }
-            return null;
-        }
-
-
-        private IEnumerable<string> NextNumbers()
-        {
-            var data = Next();
-            while (data != null)
-            {
-                yield return data;
-                data = Next();
-            }
-        }
-
-        //IEnumerator<string> IEnumerable<string>.GetEnumerator()
-        //{
-        //    return NextNumbers().GetEnumerator();
-        //}
-
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //    return this.NextNumbers().GetEnumerator();
-        //}
 
         private int GetNextPosition(char[] array)
         {
@@ -114,8 +65,9 @@ namespace TelephoneKeyPad.Domain
             return multiplied ? count : 0;
         }
 
-        public IEnumerable<string> GetPageItems(string phoneNumber, int page)
+        public IEnumerable<string> GetPageItems(string phoneNumber, int page, int pageSize)
         {
+            // This is an optimization to get arbitrary page without enumerating through the generator
             throw new NotImplementedException();
         }
     }

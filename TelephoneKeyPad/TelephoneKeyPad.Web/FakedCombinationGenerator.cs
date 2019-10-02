@@ -22,9 +22,9 @@ namespace TelephoneKeyPad.Web
             }
         }
 
-        public IEnumerable<string> GetPageItems(string phoneNumber, int page)
+        public IEnumerable<string> GetPageItems(string phoneNumber, int page, int pageSize = 10)
         {
-            return Enumerable.Range(1, 10).Select(_ => Guid.NewGuid().ToString());
+            return Enumerable.Range(1, pageSize).Select(_ => Guid.NewGuid().ToString());
         }
     }
 }
