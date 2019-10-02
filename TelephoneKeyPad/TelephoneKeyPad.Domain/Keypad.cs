@@ -4,7 +4,7 @@ using System.Linq;
 namespace TelephoneKeyPad.Domain
 {
     /// <summary>
-    /// A telephone keypad consisting groups of keys
+    /// A telephone keypad consisting groups of keys.
     /// </summary>
     public class Keypad
     {

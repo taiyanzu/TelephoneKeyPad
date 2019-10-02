@@ -17,6 +17,7 @@ namespace TelephoneKeyPad.Web.Models
         public string PhoneNumber { get; set; }
 
         public int PageSize { get; set; }
+
         public string[] PagedItems { get; set; }
 
         #region IPagedList interface
