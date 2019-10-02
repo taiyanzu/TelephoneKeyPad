@@ -24,7 +24,7 @@
             </form>
             if (Model.PagedItems != null)
             {
-                <p>@Model.TotalItemCount alpha-numeric number@(Model.TotalItemCount > 0 ? "s" : string.Empty) may be generated: </p>
+                <p>Total number of combinations: @Model.TotalItemCount</p>
                 <div id="result_container">
                     @Html.Partial("_PagedItems", Model)
                 </div>
