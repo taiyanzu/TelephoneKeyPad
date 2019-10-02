@@ -1,0 +1,30 @@
+﻿@model TelephoneKeyPad.Web.Models.CombinationsVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Combination Generator</h2>
+
+@using (Html.BeginForm("Index", "Demo"))
+{
+    <div>
+        @Html.DisplayNameFor(model => model.OriginalNumber): @Html.TextBoxFor(model => model.OriginalNumber)
+        <input type="submit" value="Generate" />
+    </div>
+}
+
+@if (Model.PagedItems != null)
+{
+<p>Total number of combinations: @Model.ItemCount</p>
+    <div>
+        <ul>
+            @foreach (var item in Model.PagedItems)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+}
+
