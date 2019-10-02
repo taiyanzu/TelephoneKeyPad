@@ -14,7 +14,7 @@ namespace TelephoneKeyPad.Web.Models
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = INVALID_PHONE_NUMBER)]
         [RegularExpression(@"^(\d{7}|\d{10})$", ErrorMessage = INVALID_PHONE_NUMBER)]
-        public string OriginalNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public int PageSize { get; set; }
         public string[] PagedItems { get; set; }
@@ -22,19 +22,20 @@ namespace TelephoneKeyPad.Web.Models
         #region IPagedList interface
         public int TotalItemCount { get; set; }
         
+        // PageIndex starts at 0
         public int PageIndex { get; set; }
 
         public int PageCount => PageSize == 0 ? 0 : TotalItemCount / PageSize;
 
         public int PageNumber => PageIndex + 1;
 
-        public bool HasPreviousPage => PageIndex > 1;
+        public bool HasPreviousPage => PageIndex > 0;
 
-        public bool HasNextPage => PageIndex < PageCount;
+        public bool HasNextPage => PageIndex < PageCount - 1;
 
-        public bool IsFirstPage => PageIndex == 1;
+        public bool IsFirstPage => PageIndex == 0;
 
-        public bool IsLastPage => PageIndex == PageCount;
+        public bool IsLastPage => PageIndex == PageCount - 1;
 
         public int ItemStart => PageIndex * PageSize + 1;
 

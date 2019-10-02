@@ -8,16 +8,16 @@ namespace TelephoneKeyPad.Web
     public class FakedCombinationGenerator : ICombinationGenerator
     {
         private const int MAX = 1000;
-        public int TotalItemCount()
+        public int TotalItemCount(string phoneNumber)
         {
             return MAX;
         }
 
-        public IEnumerable<string> Generate()
+        public IEnumerable<string> Generate(string phoneNumber)
         {
             for (var i = 0; i < MAX; i++)
             {
-                yield return i.ToString() + "-" + Guid.NewGuid().ToString();
+                yield return (i+1).ToString() + "-" + phoneNumber;
             }
         }
 

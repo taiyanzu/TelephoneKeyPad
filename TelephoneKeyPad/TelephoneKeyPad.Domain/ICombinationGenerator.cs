@@ -4,8 +4,8 @@ namespace TelephoneKeyPad.Domain
 {
     public interface ICombinationGenerator
     {
-        IEnumerable<string> Generate();
-        int TotalItemCount();
+        IEnumerable<string> Generate(string phoneNumber);
+        int TotalItemCount(string phoneNumber);
         IEnumerable<string> GetPageItems();
     }
 }

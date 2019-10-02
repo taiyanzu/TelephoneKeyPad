@@ -10,23 +10,14 @@ namespace TelephoneKeyPad.Web.Controllers
 {
     public class DemoController : Controller
     {
-        private ICombinationGenerator _combinationGenerator;
+        private const int PAGE_SIZE = 12;
+        private ICombinationGenerator _generator;
         
         public DemoController(ICombinationGenerator combinationGenerator)
         {
-            _combinationGenerator = combinationGenerator;
+            _generator = combinationGenerator;
         }
 
-        private CombinationsVM fakedCombinations => new CombinationsVM
-        {
-            OriginalNumber = "2223334567",
-            TotalItemCount = _combinationGenerator.TotalItemCount(),
-            PageSize = 10,
-            PageIndex = 0,
-            PagedItems = _combinationGenerator.GetPageItems().ToArray()
-        };
-
-        // GET: Demo
         public ActionResult Index()
         {
             return View(new CombinationsVM());
@@ -41,14 +32,30 @@ namespace TelephoneKeyPad.Web.Controllers
             }
             else
             {
-                // fake the generation
-                return View(fakedCombinations);
+                var updatedModel = GetPagedResult(model.PhoneNumber, 0);
+                return View(updatedModel);
             }
         }
 
         public ActionResult Page(string phoneNumber, int? page)
         {
-            return View(fakedCombinations);
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            var model = GetPagedResult(phoneNumber, currentPageIndex);
+            return PartialView("_PagedItems", model);
+        }
+
+        private CombinationsVM GetPagedResult(string phoneNumber, int pageIndex)
+        {
+            var total = _generator.TotalItemCount(phoneNumber);
+            IEnumerable<string> source = _generator.Generate(phoneNumber);
+            return new CombinationsVM
+            {
+                PhoneNumber = phoneNumber,
+                TotalItemCount = total,
+                PageSize = PAGE_SIZE,
+                PageIndex = pageIndex,
+                PagedItems = source.Skip(pageIndex * PAGE_SIZE).Take(PAGE_SIZE).ToArray()
+            };
         }
     }
 }

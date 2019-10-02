@@ -7,38 +7,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Combination Generator</h2>
+<div class="container">
+    <div class="row">
+        <h2>Combination Generator</h2>
 
-@using (Html.BeginForm("Index", "Demo", FormMethod.Post))
-{
-    <form>
-        <div class="form-group">
-            <div>
-                @Html.DisplayNameFor(model => model.OriginalNumber) : @Html.TextBoxFor(model => model.OriginalNumber)
-                <button type="submit" class="btn btn-primary">Generate</button>
-                @Html.ValidationMessage("PhoneNumber", "", new { @class = "text-danger" })  <br />
-            </div>
-        </div>
-    </form>
-}
-
-@if (Model.PagedItems != null)
-{
-    <p>Total number of combinations: @Model.TotalItemCount</p>
-    using (Html.BeginForm("Page", "Demo", FormMethod.Get))
-    {
-        <div class="pager">
-            @Html.Pager(
-               Model.PageSize,
-               Model.PageNumber,
-               Model.TotalItemCount).Options(o => o.AddRouteValue("PhoneNumber", Model.OriginalNumber));
-        </div>
-    }
-    <<ol class="list-group" start="@Model.ItemStart">
-        @foreach (var number in Model)
+        @using (Html.BeginForm("Index", "Demo", FormMethod.Post))
         {
-            <li class="list-group-item">@number</li>
+            <form>
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayNameFor(model => model.PhoneNumber) : @Html.TextBoxFor(model => model.PhoneNumber)
+                        <button type="submit" class="btn btn-primary">Generate</button>
+                        @Html.ValidationMessage("PhoneNumber", "", new { @class = "text-danger" })  <br />
+                    </div>
+                </div>
+            </form>
+            if (Model.PagedItems != null)
+            {
+                <p>@Model.TotalItemCount alpha-numeric number@(Model.TotalItemCount > 0 ? "s" : string.Empty) may be generated: </p>
+                <div id="result_container">
+                    @Html.Partial("_PagedItems", Model)
+                </div>
+            }
         }
-    </ol>
-
-}
+    </div>
+</div>

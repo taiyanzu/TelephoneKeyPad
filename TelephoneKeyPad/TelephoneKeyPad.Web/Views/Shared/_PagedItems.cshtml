@@ -1,0 +1,20 @@
+﻿@model TelephoneKeyPad.Web.Models.CombinationsVM
+
+<div class="pager">
+    @Html.Pager(
+        Model.PageSize,
+        Model.PageNumber,
+        Model.TotalItemCount,
+        new AjaxOptions { UpdateTargetId = "result_container" }).Options(o => o
+            .Action("Page")
+            .AddRouteValue("PhoneNumber", Model.PhoneNumber)
+            .MaxNrOfPages(5)
+            .AlwaysAddFirstPageNumber());
+</div>
+
+<ol class="list-group" start="@Model.ItemStart">
+    @foreach (var item in Model.PagedItems)
+    {
+        <li class="list-group-item">@item</li>
+    }
+</ol>
